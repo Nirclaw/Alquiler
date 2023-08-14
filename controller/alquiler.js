@@ -1,0 +1,3 @@
+class PostAlquiler {
+}
+export {};
