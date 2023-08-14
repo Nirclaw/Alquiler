@@ -1,0 +1,333 @@
+//Mostrar todos los clientes registrados en la base de datos.
+
+use("db_campus_sucursal");
+db.cliente.find();
+
+//Obtener todos los automóviles disponibles para alquiler
+use("db_campus_sucursal");
+db.alquiler.find({ estado: "inactivo" });
+
+//Listar todos los alquileres activos junto con los datos
+//de los clientes relacionados.
+use("db_campus_sucursal");
+db.alquiler.aggregate([
+  {
+    $lookup: {
+      from: "cliente",
+      localField: "id_cliente",
+      foreignField: "id_cliente",
+      as: "info_alquilerFK",
+    },
+  },
+  {
+    $match: {
+      estado: "activo",
+    },
+  },
+  {
+    $unwind: "$info_alquilerFK",
+  },
+  {
+    $project: {
+      _id: 0,
+      id_alquiler: 1,
+      id_cliente: 1,
+      id_automovil: 1,
+      estado: 1,
+      nombre: {
+        $concat: ["$info_alquilerFK.nombre", " ", "$info_alquilerFK.apellido"],
+      },
+      direccion: "$info_alquilerFK.direccion",
+      dni: "$info_alquilerFK.dni",
+    },
+  },
+  {
+    $sort: {
+      nombre: 1,
+    },
+  },
+]);
+
+//mostrar reservas pendientes con datos clientes y el auto reservado
+
+use("db_campus_sucursal");
+db.reserva.aggregate([
+  {
+    $match: {
+      estado: "pendiente",
+    },
+  },
+  {
+    $lookup: {
+      from: "cliente",
+      localField: "id_cliente",
+      foreignField: "id_cliente",
+      as: "fk_info_reserva_cliente",
+    },
+  },
+  {
+    $unwind: "$fk_info_reserva_cliente",
+  },
+  {
+    $lookup: {
+      from: "automovil",
+      localField: "id_automovil",
+      foreignField: "id_automovil",
+      as: "fk_info_auto",
+    },
+  },
+  {
+    $unwind: "$fk_info_auto",
+  },
+  {
+    $project: {
+      _id: 0,
+      "fk_info_reserva_cliente._id": 0,
+      "fk_info_auto._id": 0,
+    },
+  },
+]);
+
+//obtener los detalles del alquiler con un id_alquiler especifico
+use("db_campus_sucursal");
+db.alquiler.find({ id_alquiler: { $in: [1] } });
+
+//listar los empleado con el cargo vendedor
+use("db_campus_sucursal");
+db.empleado.aggregate([
+  {
+    $match: {
+      cargo: { $in: ["vendedor"] },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+    },
+  },
+]);
+
+//mostrar la cantidad total de autos disponibles en cada sucursal
+
+use("db_campus_sucursal");
+db.sucursal.aggregate([
+  {
+    $lookup: {
+      from: "sucursal_automovil",
+      localField: "id_sucursal",
+      foreignField: "id_sucursal",
+      as: "fk_info_sucursal",
+    },
+  },
+  {
+    $unwind: "$fk_info_sucursal",
+  },
+  {
+    $project: {
+      _id: 0,
+      "fk_info_sucursal._id": 0,
+      "fk_info_sucursal.id_sucursal": 0,
+      "fk_info_sucursal.id_automovil": 0,
+    },
+  },
+]);
+
+//obtener el costo total de un alquiler especifico
+
+use("db_campus_sucursal");
+db.alquiler.aggregate([
+  {
+    $match: {
+      id_alquiler: { $in: [1] },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      fecha_fin: 0,
+      fecha_inicio: 0,
+      estado: 0,
+      id_automovil: 0,
+    },
+  },
+]);
+//listar los clientes con el dni especifico
+
+use("db_campus_sucursal");
+db.cliente.aggregate([
+  {
+    $match: {
+      dni:{$in : [345]}
+    }
+  }
+]);
+
+//mostrar todos los automoviles con una capacidad mayor a 5 personas
+use("db_campus_sucursal");
+db.automovil.aggregate([
+  {
+    $match: {
+      capacidad: { $gte: 5 },
+    },
+  },
+]);
+//obtener los detalles del alquiler que tiene una fecha de inicio en "2023-07-05"
+
+use("db_campus_sucursal");
+db.alquiler.aggregate([
+  {
+    $match: {
+     fecha_inicio:{ $in : ["2023-07-05"] }
+    }
+  }
+]);
+
+
+//listar las reservas pendientes por un cliente
+use("db_campus_sucursal");
+db.cliente.aggregate([
+  {
+    $lookup: {
+      from: "reserva",
+      localField: "id_cliente",
+      foreignField: "id_cliente",
+      as: "fk_info_reservas",
+    },
+  },
+  {
+    $unwind: "$fk_info_reservas",
+  },
+  {
+    $match: {
+      $and: [
+        { id_cliente: { $in: [5] } },
+        { "fk_info_reservas.estado": { $in: ["pendiente"] } },
+      ],
+    },
+  },
+  {
+    $project: {
+      "fk_info_reservas._id": 0,
+      _id: 0,
+    },
+  },
+]);
+
+//mostratr los empleados con el cargo de gerente o asistente
+use("db_campus_sucursal");
+db.empleado.aggregate([
+  {
+    $match: {
+      $or: [{ cargo: "asistente" }, { cargo: "gerente" }],
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+    },
+  },
+]);
+
+//obtener los datos de los clientes que realizaron al menos un alquiler
+
+use("db_campus_sucursal");
+db.alquiler.aggregate([
+  {
+    $lookup: {
+      from: "cliente",
+      localField: "id_cliente",
+      foreignField: "id_cliente",
+      as: "fk_cliente_registro",
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      "fk_cliente_registro._id": 0,
+    },
+  },
+]);
+
+//listar los automoviles por marca y modelo
+
+use("db_campus_sucursal");
+db.automovil.aggregate([
+  {
+    $project: {
+      _id: 0,
+      id_automovil: 0,
+      anio: 0,
+      tipo: 0,
+      capacidad: 0,
+      precio_diario: 0,
+      id_automovil: 0,
+    },
+  },
+]);
+
+//mostrar la cantidad de coches en cada sucursal junto a su direccion
+
+use("db_campus_sucursal");
+db.sucursal_automovil.aggregate([
+  {
+    $lookup: {
+      from: "sucursal",
+      localField: "id_sucursal",
+      foreignField: "id_sucursal",
+      as: "fk_nombre_sucursal",
+    },
+  },
+  {
+    $lookup: {
+      from: "automovil",
+      localField: "id_automovil",
+      foreignField: "id_automovil",
+      as: "coche_fk",
+    },
+  },
+  {
+    $unwind: "$fk_nombre_sucursal",
+  },
+  {
+    $unwind: "$coche_fk",
+  },
+  {
+    $project: {
+      _id: 0,
+      "fk_nombre_sucursal._id": 0,
+      "coche_fk._id": 0,
+      id_sucursal: 0,
+      id_automovil: 0,
+    },
+  },
+]);
+
+//obtener la cantidad total de alquileres en la base de datos
+
+use("db_campus_sucursal");
+db.alquiler.countDocuments();
+
+//
+use("db_campus_sucursal");
+db.automovil.aggregate([
+  {
+    $match: {
+      capacidad: { $gte: 5 },
+    },
+  },
+]);
+
+//listar alquileres con fecha de inicio "2023-07-05 y 2023-07-10"
+use("db_campus_sucursal");
+db.alquiler.aggregate([
+  {
+    $match: {
+      $and: [
+        { fecha_inicio: { $gte: "2023-07-05" } },
+        { fecha_fin: { $lte: "2023-07-10" } },
+      ],
+    },
+  },
+]);
+
+SlZ2XO4tM1XZyssk;

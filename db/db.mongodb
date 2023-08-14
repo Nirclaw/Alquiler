@@ -1,0 +1,453 @@
+use("db_campus_sucursal");
+db.createCollection("sucursal", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "Sucursal",
+      required: ["id_sucursal", "nombre", "direccion", "telefono"],
+      properties: {
+        id_sucursal: {
+          bsonType: "int",
+          description: "'id_sucursal' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        nombre: {
+          bsonType: "string",
+          description: "'nombre' el nombre esta icorrecto",
+        },
+        direccion: {
+          bsonType: "string",
+          description: "'direccion' la direccion esta icorrecto",
+        },
+        telefono: {
+          bsonType: "int",
+          description: "'direccion' el telefono esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+      },
+    },
+  },
+});
+
+use("db_campus_sucursal");
+db.createCollection("sucursal_automovil", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "sucursal_automovil",
+      required: [
+        "id_sucursal",
+        "id_automovil",
+        "cantidad_Disponible",
+      ],
+      properties: {
+        id_sucursal: {
+          bsonType: "int",
+          description: "'id_sucursal' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_automovil: {
+          bsonType: "int",
+          description: "'id_automovil' el id esta incorrecto ",
+          pattern: "/^[A-A0-9]+$/",
+        },
+        cantidad_Disponible: {
+          bsonType: "int",
+          description:
+            "'cantidad_Disponible' la cantidad_Disponible esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+      },
+    },
+  },
+});
+
+use("db_campus_sucursal");
+db.createCollection("reserva", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "reserva",
+      required: [
+        "id_reserva",
+        "id_cliente",
+        "id_automovil",
+        "fecha_reserva",
+        "fecha_inicio",
+        "fecha_fin",
+        "estado",
+      ],
+      properties: {
+        id_reserva: {
+          bsonType: "int",
+          description: "'id_reserva' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_alquiler: {
+          bsonType: "int",
+          description: "'id_alquiler' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_automovil: {
+          bsonType: "int",
+          description: "'id_automovil' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        fecha_reserva: {
+          bsonType: "string",
+          description: "'fecha_reserva' la fecha_reserva esta icorrecto",
+        },
+        fecha_inicio: {
+          bsonType: "string",
+          description: "'fecha_inicio' la fecha_inicio esta icorrecto",
+        },
+        fecha_fin: {
+          bsonType: "string",
+          description: "'fecha_fin' la fecha_fin esta icorrecto",
+        },
+        estado: {
+          bsonType: "string",
+          description: "'estado' la estado esta icorrecto",
+        },
+      },
+    },
+  },
+});
+
+use("db_campus_sucursal");
+db.createCollection("automovil", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "automovil",
+      required: [
+        "id_automovil",
+        "marca",
+        "modelo",
+        "anio",
+        "tipo",
+        "capacidad",
+        "precio_diario",
+      ],
+      properties: {
+        id_automovil: {
+          bsonType: "int",
+          description: "'id_automovil' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        marca: {
+          bsonType: "string",
+          description: "'marca' el id esta incorrecto ",
+        },
+        modelo: {
+          bsonType: "string",
+          description: "'modelo' la modelo esta icorrecto",
+        },
+        anio: {
+          bsonType: "int",
+          description: "'anio' la anio esta icorrecto",
+          maximum:3000,
+          minimum:2000,
+        },
+        tipo: {
+          bsonType: "string",
+          description: "'tipo' la tipo esta icorrecto",
+        },
+        capacidad: {
+          bsonType: "number",
+          description: "'capacidad' la capacidad esta icorrecto",
+        },
+      },
+    },
+  },
+});
+
+use("db_campus_sucursal");
+db.createCollection("cliente", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "cliente1",
+      required: [
+        "id_cliente",
+        "nombre",
+        "apellido",
+        "dni",
+        "direccion",
+        "telefono",
+        "email",
+      ],
+      properties: {
+        id_cliente: {
+          bsonType: "int",
+          description: "'id_cliente' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        nombre: {
+          bsonType: "string",
+          description: "'nombre' el id esta incorrecto ",
+        },
+        apellido: {
+          bsonType: "string",
+          description: "'apellido' la apellido esta icorrecto",
+        },
+        dni: {
+          bsonType: "int",
+          description: "'dni' la dni esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        direccion: {
+          bsonType: "string",
+          description: "'direccion' la direccion esta icorrecto",
+        },
+        telefono: {
+          bsonType: "int",
+          description: "'telefono' la telefono esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        email: {
+          bsonType: "string",
+          description: "'email' la email esta icorrecto",
+          pattern: "^[a-zA-Z0-9-#/@._]+$",
+        },
+      },
+    },
+  },
+});
+
+use("db_campus_sucursal");
+db.createCollection("alquiler", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "alquiler",
+      required: [
+        "id_alquiler",
+        "id_cliente",
+        "id_automovil",
+        "fecha_fin",
+        "fecha_inicio",
+        "costo_total",
+        "estado",
+      ],
+      properties: {
+        id_alquiler: {
+          bsonType: "int",
+          description: "'id_alquiler' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_cliente: {
+          bsonType: "int",
+          description: "'id_cliente' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_automovil: {
+          bsonType: "int",
+          description: "'id_automovil' la id_automovil esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        fecha_fin: {
+          bsonType: "string",
+          description: "'fecha_fin' la fecha_fin esta icorrecto",
+        },
+        fecha_inicio: {
+          bsonType: "string",
+          description: "'fecha_inicio' la fecha_inicio esta icorrecto",
+        },
+        costo_total: {
+          bsonType: "int",
+          description: "'costo_total' la costo_total esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        estado: {
+          bsonType: "string",
+          description: "'estado' la estado esta icorrecto",
+        },
+      },
+    },
+  },
+});
+
+use("db_campus_sucursal");
+db.createCollection("registro_devolucion", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "registro_devolucion",
+      required: [
+        "id_registro",
+        "id_alquiler",
+        "id_empleado",
+        "fecha_devolucion",
+        "combustible_devuelto",
+        "kilometraje_devuelto",
+        "monto_adicional",
+      ],
+      properties: {
+        id_registro: {
+          bsonType: "int",
+          description: "'id_registro' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_alquiler: {
+          bsonType: "int",
+          description: "'id_alquiler' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_empleado: {
+          bsonType: "int",
+          description: "'id_empleado' la id_empleado esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        fecha_devolucion: {
+          bsonType: "string",
+          description: "'fecha_devolucion' la fecha_devolucion esta icorrecto",
+        },
+        combustible_devuelto: {
+          bsonType: "number",
+          description:
+            "'combustible_devuelto' la combustible_devuelto esta icorrecto",
+        },
+        kilometraje_devuelto: {
+          bsonType: "int",
+          description:
+            "'kilometraje_devuelto' la kilometraje_devuelto esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        monto_adicional: {
+          bsonType: "number",
+          description: "'monto_adicional' la monto_adicional esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+      },
+    },
+  },
+});
+
+use("db_campus_sucursal");
+db.createCollection("registro_entrega", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "registro_devolucion",
+      required: [
+        "id_registro",
+        "id_alquiler",
+        "id_empleado",
+        "fecha_entrega",
+        "combustible_Entregado",
+        "kilometraje_devuelto",
+      ],
+      properties: {
+        id_registro: {
+          bsonType: "int",
+          description: "'id_registro' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_alquiler: {
+          bsonType: "int",
+          description: "'id_alquiler' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        id_empleado: {
+          bsonType: "int",
+          description: "'id_empleado' la id_empleado esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        fecha_entrega: {
+          bsonType: "string",
+          description: "'fecha_entrega' la fecha_entrega esta icorrecto",
+        },
+        combustible_Entregado: {
+          bsonType: "number",
+          description:
+            "'combustible_Entregado' la combustible_Entregado esta icorrecto",
+        },
+        kilometraje_devuelto: {
+          bsonType: "number",
+          description:
+            "'kilometraje_devuelto' la kilometraje_devuelto esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+      },
+    },
+  },
+});
+use("db_campus_sucursal");
+db.createCollection("empleado", {
+  capped: true,
+  size: 690,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "registro_devolucion",
+      required: [
+        "id_empleado",
+        "nombre",
+        "apellido",
+        "dni",
+        "direccion",
+        "telefono",
+        "cargo",
+      ],
+      properties: {
+        id_empleado: {
+          bsonType: "int",
+          description: "'id_empleado' el id esta incorrecto ",
+          pattern: "/^[0-9]+$/",
+        },
+        nombre: {
+          bsonType: "string",
+          description: "'nombre' el id esta incorrecto ",
+        },
+        apellido: {
+          bsonType: "string",
+          description: "'apellido' la apellido esta icorrecto",
+        },
+        dni: {
+          bsonType: "number",
+          description: "'dni' la dni esta icorrecto",
+        },
+        direccion: {
+          bsonType: "string",
+          description: "'direccion' la direccion esta icorrecto",
+        },
+        telefono: {
+          bsonType: "int",
+          description: "'telefono' la telefono esta icorrecto",
+          pattern: "/^[0-9]+$/",
+        },
+        cargo : {
+          bsonType: "string",
+          description: "'cargo ' la cargo  esta icorrecto",
+      
+        },
+      },
+    },
+  },
+});

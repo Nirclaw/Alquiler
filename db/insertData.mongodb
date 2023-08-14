@@ -1,0 +1,409 @@
+use("db_campus_sucursal");
+db.sucursal.insertMany([
+  {
+    id_sucursal: 1,
+    nombre: "Zona Franca",
+    direccion: "calle zona Franca",
+    telefono: 34324,
+  },
+  {
+    id_sucursal: 2,
+    nombre: "Zona Blanca",
+    direccion: "calle zona Blanca",
+    telefono: 2342342,
+  },
+  {
+    id_sucursal: 3,
+    nombre: "Zona Roja",
+    direccion: "calle zona Roja",
+    telefono: 34566456,
+  },
+  {
+    id_sucursal: 4,
+    nombre: "Zona Verda",
+    direccion: "calle zona Verda",
+    telefono: 345345,
+  },
+  {
+    id_sucursal: 5,
+    nombre: "Zona Amarilla",
+    direccion: "calle zona Franca",
+    telefono: 456345345,
+  },
+]);
+
+use("db_campus_sucursal");
+db.sucursal_automovil.insertMany([
+  {
+    id_sucursal: 1,
+    id_automovil: 1,
+    cantidad_Disponible: 10,
+  },
+  {
+    id_sucursal: 2,
+    id_automovil: 1,
+    cantidad_Disponible: 30,
+  },
+  {
+    id_sucursal: 3,
+    id_automovil: 1,
+    cantidad_Disponible: 40,
+  },
+  {
+    id_sucursal: 4,
+    id_automovil: 1,
+    cantidad_Disponible: 50,
+  },
+  {
+    id_sucursal: 5,
+    id_automovil: 1,
+    cantidad_Disponible: 107,
+  },
+]);
+
+use("db_campus_sucursal");
+db.reserva.insertMany([
+  {
+    id_reserva: 1,
+    id_cliente: 1,
+    id_automovil: 1,
+    fecha_reserva: "2023-7-31",
+    fecha_inicio: "2023-7-31",
+    fecha_fin: "2023-7-31",
+    estado: "pendiente",
+  },
+  {
+    id_reserva: 1,
+    id_cliente: 2,
+    id_automovil: 1,
+    fecha_reserva: "2023-7-31",
+    fecha_inicio: "2023-7-31",
+    fecha_fin: "2023-7-31",
+    estado: "pendiente",
+  },
+  {
+    id_reserva: 1,
+    id_cliente: 3,
+    id_automovil: 1,
+    fecha_reserva: "2023-7-31",
+    fecha_inicio: "2023-7-31",
+    fecha_fin: "2023-7-31",
+    estado: "confirmado",
+  },
+  {
+    id_reserva: 1,
+    id_cliente: 4,
+    id_automovil: 1,
+    fecha_reserva: "2023-7-31",
+    fecha_inicio: "2023-7-31",
+    fecha_fin: "2023-7-31",
+    estado: "pendiente",
+  },
+  {
+    id_reserva: 1,
+    id_cliente: 5,
+    id_automovil: 1,
+    fecha_reserva: "2023-7-31",
+    fecha_inicio: "2023-7-31",
+    fecha_fin: "2023-7-31",
+    estado: "pendiente",
+  },
+]);
+
+use("db_campus_sucursal");
+db.automovil.insertMany([
+  {
+    id_automovil: 1,
+    marca: "mazda",
+    modelo: "mazda 3",
+    anio: 2023,
+    tipo: "agua",
+    capacidad: 100,
+    precio_diario: 10.2,
+  },
+  {
+    id_automovil: 2,
+    marca: "mercedes",
+    modelo: "macqueen",
+    anio: 2023,
+    tipo: "fuego",
+    capacidad: 100,
+    precio_diario: 10.2,
+  },
+  {
+    id_automovil: 3,
+    marca: "kia",
+    modelo: "penelope",
+    anio: 2024,
+    tipo: "aire",
+    capacidad: 100,
+    precio_diario: 10.2,
+  },
+  {
+    id_automovil: 4,
+    marca: "carrazo",
+    modelo: "macqueen",
+    anio: 2024,
+    tipo: "Rapido",
+    capacidad: 100,
+    precio_diario: 10.2,
+  },
+  {
+    id_automovil: 5,
+    marca: "carrito",
+    modelo: "franchesco",
+    anio: 2000,
+    tipo: "lentito",
+    capacidad: 100,
+    precio_diario: 10.2,
+  },
+]);
+
+use("db_campus_sucursal");
+db.cliente.insertMany([
+  {
+    id_cliente: 1,
+    nombre: "Nicolas",
+    apellido: "Caicedo",
+    dni: 123,
+    direccion: "a la vuelta de la esquina al lado de la tienda",
+    telefono: 12345,
+    email: "caic@sdfg.com",
+  },
+  {
+    id_cliente: 2,
+    nombre: "Alba",
+    apellido: "Rueda",
+    dni: 345,
+    direccion: "a la vuelta de la esquina al lado de la tienda",
+    telefono: 43532,
+    email: "caico@sdfg.com",
+  },
+  {
+    id_cliente: 3,
+    nombre: "Paula",
+    apellido: "Caicedo",
+    dni: 6456,
+    direccion: "a la vuelta de la esquina al lado de la tienda",
+    telefono: 345234,
+    email: "caici@sdfg.com",
+  },
+  {
+    id_cliente: 4,
+    nombre: "Jhoin",
+    apellido: "Romerop",
+    dni: 678,
+    direccion: "a la vuelta de la esquina al lado de la tienda",
+    telefono: 5464356,
+    email: "caicu@sdfg.com",
+  },
+  {
+    id_cliente: 5,
+    nombre: "Brayan",
+    apellido: "Perez",
+    dni: 890,
+    direccion: "a la vuelta de la esquina al lado de la tienda",
+    telefono: 23454,
+    email: "caict@dsf.com",
+  },
+]);
+
+use("db_campus_sucursal");
+db.alquiler.insertMany([
+  {
+    id_alquiler: 1,
+    id_cliente: 1,
+    id_automovil: 1,
+    fecha_fin: "2023-07-10",
+    fecha_inicio: "2023-07-05",
+    costo_total: 102,
+    estado: "inactivo",
+  },
+  {
+    id_alquiler: 2,
+    id_cliente: 2,
+    id_automovil: 1,
+    fecha_fin: "2023-07-09",
+    fecha_inicio: "2023-07-05",
+    costo_total: 102,
+    estado: "inactivo",
+  },
+  {
+    id_alquiler: 3,
+    id_cliente: 3,
+    id_automovil: 1,
+    fecha_fin: "2023-07-10",
+    fecha_inicio: "2023-07-05",
+    costo_total: 102,
+    estado: "inactivo",
+  },
+  {
+    id_alquiler: 4,
+    id_cliente: 4,
+    id_automovil: 1,
+    fecha_fin: "2023-07-30",
+    fecha_inicio: "2023-07-05",
+    costo_total: 102,
+    estado: "activo",
+  },
+  {
+    id_alquiler: 5,
+    id_cliente: 5,
+    id_automovil: 1,
+    fecha_fin: "2023-07-23",
+    fecha_inicio: "2023-07-05",
+    costo_total: 102,
+    estado: "activo",
+  },
+  {
+    id_alquiler: 6,
+    id_cliente: 5,
+    id_automovil: 1,
+    fecha_fin: "2023-07-23",
+    fecha_inicio: "2023-07-31",
+    costo_total: 102,
+    estado: "activo",
+  },
+]);
+
+use("db_campus_sucursal");
+db.registro_devolucion.insertMany([
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_devolucion: "2023-07-23",
+    combustible_devuelto: 10.2,
+    kilometraje_devuelto: 1,
+    monto_adicional: 102.2,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_devolucion: "2023-07-23",
+    combustible_devuelto: 10.2,
+    kilometraje_devuelto: 1,
+    monto_adicional: 102.2,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_devolucion: "2023-07-23",
+    combustible_devuelto: 10.2,
+    kilometraje_devuelto: 1,
+    monto_adicional: 102.2,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_devolucion: "2023-07-23",
+    combustible_devuelto: 10.2,
+    kilometraje_devuelto: 1,
+    monto_adicional: 102.2,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_devolucion: "2023-07-23",
+    combustible_devuelto: 10.2,
+    kilometraje_devuelto: 1,
+    monto_adicional: 102.2,
+  },
+]);
+
+use("db_campus_sucursal");
+db.registro_entrega.insertMany([
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_entrega: "2023-07-23",
+    combustible_Entregado: 1.23,
+    kilometraje_entregado: 12.3,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_entrega: "2023-07-23",
+    combustible_Entregado: 12.3,
+    kilometraje_entregado: 1.23,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_entrega: "2023-07-23",
+    combustible_Entregado: 12.3,
+    kilometraje_entregado: 1.23,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_entrega: "2023-07-23",
+    combustible_Entregado: 12.3,
+    kilometraje_entregado: 12.3,
+  },
+  {
+    id_registro: 1,
+    id_alquiler: 1,
+    id_empleado: 1,
+    fecha_entrega: "2023-07-23",
+    combustible_Entregado: 12.3,
+    kilometraje_entregado: 12.3,
+  },
+]);
+
+use("db_campus_sucursal");
+db.empleado.insertMany([
+  {
+    id_empleado: 1,
+    nombre: "No soy nicolas",
+    apellido: "Mucho menos caicedo",
+    dni: 123,
+    direccion: "123",
+    telefono: 432,
+    cargo: "gerente",
+  },
+  {
+    id_empleado: 2,
+    nombre: "No soy nicolas",
+    apellido: "Mucho menos caicedo",
+    dni: 123,
+    direccion: "123",
+    telefono: 432,
+    cargo: "gerente",
+  },
+  {
+    id_empleado: 3,
+    nombre: "No soy nicolas",
+    apellido: "Mucho menos caicedo",
+    dni: 123,
+    direccion: "123",
+    telefono: 432,
+    cargo: "vendedor",
+  },
+  {
+    id_empleado: 4,
+    nombre: "No soy nicolas",
+    apellido: "Mucho menos caicedo",
+    dni: 123,
+    direccion: "123",
+    telefono: 432,
+    cargo: "gerente",
+  },
+  {
+    id_empleado: 5,
+    nombre: "No soy nicolas",
+    apellido: "Mucho menos caicedo",
+    dni: 123,
+    direccion: "123",
+    telefono: 432,
+    cargo: "gerente",
+  },
+]);
